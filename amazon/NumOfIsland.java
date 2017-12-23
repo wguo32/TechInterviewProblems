@@ -1,5 +1,8 @@
 /**
 BFS
+1. time complexity is O(m * n), as each cell need to be checked
+2. space complexity is O(min(m, n)), this happens when the outer layer of visited cells
+is the diagonal of a smaller square
 */
 class Coordinate {
   int x;
@@ -56,6 +59,9 @@ class Solution {
 
 /**
 resursive approach
+1. DFS time complexity and space complexity are O(m * n)
+2. For space complexity: if the grid is filled with islands, then the trace of visited cells
+is like a curl.
 */
 class Solution {
     public int numIslands(char[][] grid) {
