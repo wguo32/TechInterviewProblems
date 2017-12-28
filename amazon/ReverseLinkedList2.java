@@ -25,7 +25,7 @@ class Solution {
         ListNode nNode = mNode;
         ListNode postN = nNode.next;
 
-        //it is < not <= because we change pointer of m+1 to point ot m, when it is n(which is equivalent to m+1 here)
+        //it is < not <= because we change pointer of m+1 to point to m, when it is n(which is equivalent to m+1 here)
         while (count < n) {
             ListNode temp = postN.next;
             postN.next = nNode;
