@@ -10,7 +10,7 @@ class Task {
     }
 }
 public class RoundRobinScheduling {
-    public int averageWaitTime(int[] startTimes, int[] waitings, int quantum) {
+    public float averageWaitTime(int[] startTimes, int[] waitings, int quantum) {
         if (startTimes == null || waitings == null ||
             startTimes.length == 0 || waitings.length == 0) {
             return 0;
@@ -33,7 +33,7 @@ public class RoundRobinScheduling {
                 queue.offer(new Task(current, task.waiting - quantum));
             }
         }
-        return wait;
+        return (float)wait / len;
     }
 
     public static void main(String args[]) {
@@ -41,7 +41,7 @@ public class RoundRobinScheduling {
         int[] starts = {0,0,0};
         int[] waitings = {10, 5, 8};
         int quantum = 2;
-        int wait = rrs.averageWaitTime(starts,waitings, quantum);
+        float wait = rrs.averageWaitTime(starts,waitings, quantum);
         System.out.println("Waiting time is " + wait);
     }
 }
