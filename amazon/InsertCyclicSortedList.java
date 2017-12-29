@@ -43,7 +43,7 @@ public class Solution {
         while (curr.val < x) {
             pre = curr;
             curr = curr.next;
-            if (curr == max.next) {
+            if (curr == max.next) { // go back to the start point
                 break;
             }
         }
