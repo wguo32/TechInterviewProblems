@@ -16,7 +16,7 @@ class Solution {
                 needCount--;
             }
             hash[s.charAt(end)]--;
-            right++;
+            end++;
 
             if (needCount == 0) {
                 result.add(start);
@@ -26,7 +26,7 @@ class Solution {
                     needCount++;
                 }
                 hash[s.charAt(start)]++;
-                left++;
+                start++;
             }
         }
         return result;
