@@ -7,6 +7,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+ // count the number of paths sum up to a number, the path could start and end at any node
 class Solution {
     public int pathSum(TreeNode root, int sum) {
         if (root == null) {
