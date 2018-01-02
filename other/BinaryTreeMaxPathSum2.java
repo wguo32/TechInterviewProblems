@@ -14,7 +14,7 @@ http://www.lintcode.com/en/problem/binary-tree-maximum-path-sum-ii/
  * }
  */
 
-
+// path starts from root to any node
 public class Solution {
     /*
      * @param root: the root of binary tree.
