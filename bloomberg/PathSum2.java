@@ -7,6 +7,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ //Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
 
  // use backtracking, similar to subsets problem
 class Solution {
