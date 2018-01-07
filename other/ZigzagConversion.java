@@ -8,7 +8,7 @@ class Solution {
         int initDist = num;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < numRows; i++) {
-            printStr(s, num, 0, initDist, sb);
+            printStr(s, num, i, initDist, sb);
             initDist -= 2;
         }
         return sb.toString();
@@ -21,7 +21,7 @@ class Solution {
             }
             sb.append(s.charAt(start));
             start += initDist;
-            initDist = magic - initDist;
+            initDist = num - initDist;
         }
     }
 }
