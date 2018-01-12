@@ -21,7 +21,7 @@
         Interval pre = null;
         for (Interval interval : intervals) {
             if (pre == null || pre.end < interval.start) {
-                result.add(pre);
+                result.add(interval);
                 pre = interval;
             } else {
                 pre.end = Math.max(pre.end, interval.end);
