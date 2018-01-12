@@ -26,6 +26,30 @@ class Solution {
 // approach2 DP
 class Solution {
     public List<List<Integer>> generate(int numRows) {
-        
+        List<List<Integer>> result = new ArrayList<>();
+        if (numRows <= 0) {
+            return result;
+        }
+
+        int[][] dp = new int[numRows][numRows];
+        for (int i = 0; i < numRows; i++) {
+            dp[i][0] = 1;
+            dp[i][i] = 1;
+        }
+
+        ArrayList<Integer> pre = new ArrayList<>();
+        pre.add(1);
+        result.add(pre);
+        for (int i = 1; i < numRows; i++) {
+            List<Integer> list = new ArrayList<>();
+            list.add(1);
+            for (int j = 1; j < i; j++) {
+                dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+                list.add(dp[i][j]);
+            }
+            list.add(1);
+            result.add(list);
+        }
+        return result;
     }
 }
