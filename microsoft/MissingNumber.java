@@ -28,5 +28,3 @@ class Solution {
         return sum;
     }
 }
-
-// approach2 bit manipulation
