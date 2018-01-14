@@ -1,14 +1,32 @@
+// approach1 hashset
 class Solution {
     public int missingNumber(int[] nums) {
-        Set<Integer> numSet = new HashSet<Integer>();
-        for (int num : nums) numSet.add(num);
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            set.add(nums[i]);
+        }
 
-        int expectedNumCount = nums.length + 1;
-        for (int number = 0; number < expectedNumCount; number++) {
-            if (!numSet.contains(number)) {
-                return number;
+        for (int i = 0; i < nums.length + 1; i++) {
+            if (!set.contains(i)) {
+                return i;
             }
         }
         return -1;
     }
 }
+
+// approach2 calculate sum of first n numbers
+class Solution {
+    public int missingNumber(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length + 1; i++) {
+            sum += i;
+        }
+        for (int num : nums) {
+            sum -= num;
+        }
+        return sum;
+    }
+}
+
+// approach2 bit manipulation
