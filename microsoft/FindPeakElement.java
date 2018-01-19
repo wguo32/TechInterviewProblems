@@ -1,3 +1,4 @@
+// original solution
 class Solution {
     public int findPeakElement(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -21,5 +22,37 @@ class Solution {
             }
         }
         return -1;
+    }
+}
+
+// linear search with less code
+class Solution {
+    public int findPeakElement(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                return i;
+            }
+        }
+        return nums.length - 1;
+    }
+}
+
+// binary search
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int start = 0,  end = nums.length - 1;
+        while (start + 1  < end) {
+            int mid = (end - start) / 2 + start;
+            if (nums[mid] < nums[mid + 1]) {
+                start = mid;
+            } else {
+                end = mid;
+            }
+        }
+        if (nums[start] < nums[end]) {
+            return end;
+        } else {
+            return start;
+        }
     }
 }
