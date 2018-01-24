@@ -14,6 +14,7 @@ public class FindFirstRepeatingChar {
         for (char c : s.toCharArray()) {
             if (table[c] > 1) {
                 return c;
+                // return Character.toString(c); // if the return type is string
             }
         }
         return ' ';
