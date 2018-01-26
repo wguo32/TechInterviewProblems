@@ -1,3 +1,26 @@
+// iterative approach
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        LinkedList<String> result = new LinkedList<>();
+        if (digits == null || digits.length() == 0) {
+            return new ArrayList<>();
+        }
+        String[] mapping = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        result.offer("");
+        while (!result.isEmpty()) {
+            if (result.peek().length() == digits.length()) {
+                break;
+            }
+            String subStr = result.poll();
+            for (char c : mapping[digits.charAt(subStr.length()) - '0'].toCharArray()) {
+                result.offer(subStr + c);
+            }
+        }
+        return result;
+    }
+}
+
+// backtracking
 class Solution {
     public List<String> letterCombinations(String digits) {
         List<String> result = new ArrayList<>();
