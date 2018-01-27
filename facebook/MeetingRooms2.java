@@ -22,16 +22,24 @@ class Solution {
         Arrays.sort(starts);
         Arrays.sort(ends);
 
-        int i = 1, j = 0, rooms = 1, count = 1;
-        while (i < intervals.length && j < intervals.length) {
+        // int i = 1, j = 0, rooms = 1, count = 1;
+        // while (i < intervals.length && j < intervals.length) {
+        //     if (starts[i] < ends[j]) {
+        //         rooms++;
+        //         i++;
+        //         if (rooms > count) {
+        //             count = rooms;
+        //         }
+        //     } else {
+        //         rooms--;
+        //         j++;
+        //     }
+        // }
+        int j = 0, count = 0;
+        for (int i = 0; i < intervals.length; i++) {
             if (starts[i] < ends[j]) {
-                rooms++;
-                i++;
-                if (rooms > count) {
-                    count = rooms;
-                }
+                count++;
             } else {
-                rooms--;
                 j++;
             }
         }
