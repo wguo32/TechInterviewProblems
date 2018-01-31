@@ -14,9 +14,11 @@ public class FindMatchingPair {
             if (!Character.isLetter(chars[i])) {
                 break;
             }
+
             if (Character.isUpperCase(chars[i])) {
                 dq.add(chars[i]);
             } else {
+
                 if (dq.isEmpty()) {
                     break;
                 } else {
