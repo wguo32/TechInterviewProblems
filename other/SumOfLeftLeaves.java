@@ -7,7 +7,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
- // recursive approach
+ // recursive approach 
 class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
         if(root == null) return 0;
