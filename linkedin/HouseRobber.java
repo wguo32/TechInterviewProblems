@@ -9,3 +9,17 @@ class Solution {
         return Math.max(dp[num.length][0], dp[num.length][1]);
     }
 }
+
+// with O(1) space
+class Solution {
+    public int rob(int[] num) {
+        int preMax = 0;
+        int curMax = 0;
+        for (int number : num) {
+            int temp = curMax;
+            curMax = Math.max(preMax + number, curMax);
+            preMax = temp;
+        }
+        return curMax;
+    }
+}
