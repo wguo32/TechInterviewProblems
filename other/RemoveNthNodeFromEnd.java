@@ -6,6 +6,7 @@
  *     ListNode(int x) { val = x; }
  * }
  */
+ // two pass
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if (head == null) {
@@ -27,6 +28,28 @@ class Solution {
             len--;
         }
         cur.next = cur.next.next;
+        return dummy.next;
+    }
+}
+
+// one pass
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode first = dummy;
+        ListNode second = dummy;
+        int step = 0;
+        while (step < n + 1) {
+            first = first.next;
+            step++;
+        }
+
+        while (first != null) {
+            second = second.next;
+            first = first.next;
+        }
+        second.next = second.next.next;
         return dummy.next;
     }
 }
