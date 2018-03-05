@@ -7,7 +7,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
- // recursive approach
+ // recursive approach with hashset
 class Solution {
     public boolean findTarget(TreeNode root, int k) {
         Set<Integer> set = new HashSet<>();
@@ -23,5 +23,32 @@ class Solution {
         }
         set.add(k - root.val);
         return helper(root.left, set, k) || helper(root.right, set, k);
+    }
+}
+
+// nonrecursive approach with hashset and Queue
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+        if (root == null) {
+            return false;
+        }
+
+        Set<Integer> set = new HashSet<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (set.contains(node.val)) {
+                return true;
+            }
+            set.add(k - node.val);
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+        return false;
     }
 }
