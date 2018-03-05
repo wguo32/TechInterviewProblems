@@ -52,3 +52,38 @@ class Solution {
         return false;
     }
 }
+
+// using BST property and traverse the tree
+
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+        if (root == null) {
+            return false;
+        }
+
+        List<Integer> list = new ArrayList<>();
+        traverseBST(root, list);
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            int first = list.get(i);
+            int second = list.get(j);
+            if (first + second == k) {
+                return true;
+            } else if (first + second < k) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return false;
+    }
+
+    private void traverseBST(TreeNode root, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        traverseBST(root.left, list);
+        list.add(root.val);
+        traverseBST(root.right, list);
+    }
+}
