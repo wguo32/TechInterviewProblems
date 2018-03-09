@@ -20,20 +20,23 @@ class Solution {
         if (inStart > inEnd || preStart >= preorder.length) {
             return null;
         }
-        int index = getIndex(inorder, preorder[preStart]);
+        int index = getIndex(inorder, preorder[preStart], inStart, inEnd);
         int leftCount = index - inStart + 1;
         int preStartRight = preStart + leftCount;
         TreeNode root = new TreeNode(inorder[index]);
-        root.left = helper(preorder, inorder, inStart, index - 1);
+        root.left = helper(preorder, inorder, inStart, index - 1, preStart + 1);
         root.right = helper(preorder, inorder, index + 1, inEnd, preStartRight);
         return root;
     }
 
-    private int getIndex(int[] nums, int num) {
-        for (int i = 0; i < nums.length; i++) {
+    private int getIndex(int[] nums, int num, int start, int end) {
+        int index = 0;
+        for (int i = start; i <= end; i++) {
             if (nums[i] == num) {
-                return i;
+                index = i;
+                break;
             }
         }
+        return index;
     }
 }
