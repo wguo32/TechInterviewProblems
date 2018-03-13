@@ -47,3 +47,26 @@ class Solution {
         return false;
     }
 }
+
+/* Dynamic programming bottom up approach
+*/
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return true;
+        }
+        int[] memo = new int[nums.length];
+        memo[nums.length - 1] = 1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            int jumpRange = Math.min(nums[i] + i, nums.length - 1);
+            for (int j = i + 1; j <= jumpRange; j++) {
+                if (memo[j] == 1) {
+                    memo[i] = 1;
+                    break;
+                }
+            }
+        }
+        return memo[0] = 1;
+    }
+}
