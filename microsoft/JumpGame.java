@@ -78,6 +78,6 @@ class Solution {
                 lastPos = i;
             }
         }
-        return lastPos = 0;
+        return lastPos == 0;
     }
 }
