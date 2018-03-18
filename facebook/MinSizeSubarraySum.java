@@ -1,3 +1,4 @@
+// time complexity O(N^2)
 class Solution {
     public int minSubArrayLen(int s, int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -21,5 +22,25 @@ class Solution {
             return 0;
         }
         return minSize;
+    }
+}
+
+// linear time complexity with slide window
+class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int minLen = Integer.MAX_VALUE;
+        int sum = 0;
+
+        for (int right = 0, left = 0; right < nums.length; right++) {
+            sum += nums[right];
+            while (left <= right && sum >= s) {
+                minLen = Math.min(minLen, right - left + 1);
+                sum -= nums[left++];
+            }
+        }
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
     }
 }
