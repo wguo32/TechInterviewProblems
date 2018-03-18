@@ -1,27 +1,3 @@
-class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        if (s == null || s.length() == 0) {
-            return 0;
-        }
-
-        int[] marker = new int[256];
-        char chars = s.toCharArray();
-        int maxLen = 0;
-        int j = 0;
-        while (j < chars.length) {
-            if (marker[chars[j]] == 0) {
-                marker[chars[j]] = j;
-            } else {
-                maxLen = Math.max(maxLen, j - marker[chars[j]]);
-                marker[chars[j]] = j;
-            }
-            j++;
-        }
-        return maxLen;
-    }
-}
-
-
 // using hashmap
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -38,6 +14,23 @@ class Solution {
             }
             maxLen = Math.max(maxLen, right - left + 1);
             map.put(chars[right], right);
+        }
+        return maxLen;
+    }
+}
+
+// using array to mark repeated chars
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int[] marker = new int[256];
+        int maxLen = 0;
+        for (int right = 0, left = 0; right < s.length(); right++) {
+            left = Math.max(left, marker[s.charAt(right)]);
+            maxLen = Math.max(maxLen, right - left + 1);
+            marker[s.charAt(right)] = right + 1;
         }
         return maxLen;
     }
