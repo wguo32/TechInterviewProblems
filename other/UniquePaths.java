@@ -35,3 +35,23 @@ class Solution {
         return track[(m - 1) % 2][n - 1];
     }
 }
+
+// even better space complexity, only keep one row in track
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[] track = new int[n];
+        for (int i = 0; i < n; i++) {
+            track[i] = 1;
+        }
+
+        for (int i = 1; i < m; i++) {
+            int pre = 1;
+            for (int j = 1; j < n; j++) {
+                track[j] = track[j] + pre;
+                pre = track[j];
+            }
+        }
+        return track[n - 1];
+    }
+}
