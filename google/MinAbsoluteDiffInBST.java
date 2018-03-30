@@ -1,3 +1,26 @@
+// inorder traversal
+class Solution {
+    int minDiff = Integer.MAX_VALUE;
+    TreeNode preNode;
+    public int getMinimumDifference(TreeNode root) {
+        inTraversal(root);
+        return minDiff;
+    }
+
+    private void inTraversal(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inTraversal(root.left);
+        if (preNode != null) {
+            minDiff = Math.min(minDiff, root.val - preNode.val);
+        }
+        preNode = root;
+        inTraversal(root.right);
+    }
+}
+
+
 class Solution {
     int min = Integer.MAX_VALUE;
     Integer prev = null;
@@ -16,5 +39,4 @@ class Solution {
 
         return min;
     }
-
 }
