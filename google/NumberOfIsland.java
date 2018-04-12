@@ -91,27 +91,31 @@ class Solution {
             this.parent = new int[num];
             for (int i = 0; i < num; i++) {
                 parent[i] = i;
+                count++;
             }
         }
+
+        public int getCount() {
+            return this.count;
+        }
+
         public void setCount(int num) {
             this.count = num;
-        }
-        public int getCount() {
-            return count;
         }
 
         public int find(int a) {
             if (parent[a] == a) {
                 return a;
             }
-            return parent[a] = find(parent[a]);
+            parent[a] = find(parent[a]);
+            return parent[a];
         }
 
         public void union(int a, int b) {
             int rootA = find(a);
             int rootB = find(b);
             if (rootA != rootB) {
-                parent[a] = rootB;
+                parent[rootA] = rootB;
                 count--;
             }
         }
@@ -138,16 +142,16 @@ class Solution {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j] == '1') {
                     if (i - 1 >= 0 && grid[i - 1][j] == '1') {
-                        uf.union(i * row + j, (i - 1) * row + j);
+                        uf.union(i * col + j, (i - 1) * col + j);
                     }
                     if (j + 1 < col && grid[i][j + 1] == '1') {
-                        uf.union(i * row + j, i * row + j + 1);
+                        uf.union(i * col + j, i * col + j + 1);
                     }
                     if (i + 1 < row && grid[i + 1][j] == '1') {
-                        uf.union(i * row + j, (i + 1) * row + j);
+                        uf.union(i * col + j, (i + 1) * col + j);
                     }
                     if (j - 1 >= 0 && grid[i][j - 1] == '1') {
-                        uf.union(i * row + j, i * row  + j - 1);
+                        uf.union(i * col + j, i * col  + j - 1);
                     }
                 }
             }
