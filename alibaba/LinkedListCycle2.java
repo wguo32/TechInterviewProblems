@@ -16,14 +16,14 @@ public class Solution {
         }
         ListNode intersec = getIntersec(head);
         if (intersec == null) {
-            return null;
+            return intersec;
         }
         ListNode start = head;
         while (start != intersec) {
             start = start.next;
             intersec = intersec.next;
         }
-        return start;
+        return intersec;
     }
 
     // get the intersection node in the list
@@ -33,12 +33,12 @@ public class Solution {
         }
         ListNode slow = head;
         ListNode fast = head;
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
+        while (fast != null || fast.next != null) {
             if (fast == slow) {
                 return fast;
             }
+            fast = fast.next.next;
+            slow = slow.next;
         }
         return null;
     }
