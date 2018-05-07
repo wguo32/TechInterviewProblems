@@ -22,11 +22,11 @@ class Solution {
     public int myAtoi(String str) {
         int index = 0, sign = 1;
         int result = 0;
+        str = str.trim();
         if (str == null || str.length() == 0) {
             return 0;
         }
 
-        str = str.trim();
         if (str.charAt(index) == '-' || str.charAt(index) == '+') {
             sign = str.charAt(index) == '-' ? -1 : 1;
             index++;
