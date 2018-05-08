@@ -1,3 +1,4 @@
+// recursive approach
 class Solution {
     public List<String> letterCombinations(String digits) {
         List<String> result = new ArrayList<>();
@@ -23,5 +24,29 @@ class Solution {
             sb.deleteCharAt(sb.length() - 1);
         }
 
+    }
+}
+
+// iterative approach
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        if (digits == null || digits.length() == 0) {
+            return new ArrayList<String>();
+        }
+        LinkedList<String> list = new LinkedList<>();
+        String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        list.offer("");
+
+        while (!list.isEmpty()) {
+            if (list.peek().length() == digits.length()) {
+                break;
+            }
+            String str = list.poll();
+            char digit = digits.charAt(str.length());
+            for (char c : mapping[digit - '0'].toCharArray()) {
+                list.offer(str + c);
+            }
+        }
+        return list;
     }
 }
