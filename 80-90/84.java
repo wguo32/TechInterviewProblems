@@ -23,3 +23,29 @@ class Solution {
                         findMaxRec(heights, minIndex + 1, end)));
     }
 }
+
+// O(N) time complexity with stack
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        if (heights == null || heights.length == 0) {
+            return 0;
+        }
+
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int maxRec = 0;
+
+        for (int i = 0; i < heights.length; i++) {
+            while (stack.peek()  != -1 && heights[i] <= heights[stack.peek()]) {
+                int leftIndex = stack.pop();
+                maxRec = Math.max(maxRec, heights[leftIndex] * (i - stack.peek() - 1));
+            }
+            stack.push(i);
+        }
+
+        while (stack.peek() != -1) {
+            maxRec = Math.max(maxRec, heights[stack.pop()] * (heights.length - stack.peek()  - 1));
+        }
+        return maxRec;
+    }
+}
