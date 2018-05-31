@@ -9,24 +9,26 @@ class Solution {
             int mid = start + (end - start) / 2;
             if (nums[mid] == target) {
                 return true;
-            } else if (nums[mid] >= nums[start]]) {
+            } else if (nums[mid] > nums[start]) {
                 if (nums[mid] >= target && target >= nums[start]) {
                     end = mid;
                 } else {
                     start = mid;
                 }
-            } else {
+            } else if (nums[mid] < nums[start]) {
                 if (nums[mid] <= target && target <= nums[end]) {
                     start = mid;
                 } else {
                     end = mid;
                 }
+            } else {
+                start++;
             }
         }
 
         if (nums[start] == target || nums[end] == target) {
             return true;
         }
-        return false
+        return false;
     }
 }
