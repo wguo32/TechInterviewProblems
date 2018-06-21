@@ -7,7 +7,7 @@
  * }
  */
 
- // divide and conquer with O(1) space complexity and O(kN) time complexity
+ // divide and conquer with O(1) space complexity and O(Nlogk) time complexity
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null || lists.length == 0) {
@@ -52,6 +52,42 @@ class Solution {
         }
         if (second == null) {
             pre.next = first;
+        }
+        return dummy.next;
+    }
+}
+
+// use priority queue, O(k) space complexity and O(Nlogk) time complexity
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) {
+            return null;
+        }
+
+        Comparator<ListNode> listComp = new Comparator<ListNode> (){
+            public int compare(ListNode a, ListNode b) {
+                return a.val - b.val;
+            }
+        };
+
+        Queue<ListNode> queue = new PriorityQueue<>(lists.length, listComp);
+        for (ListNode head : lists) {
+            if (head != null) {
+                queue.offer(head);
+            }
+        }
+
+        ListNode dummy = new ListNode(0);
+        ListNode pre = dummy;
+
+        while (!queue.isEmpty()) {
+            ListNode smallest = queue.poll();
+            pre.next = smallest;
+            pre = smallest;
+
+            if (smallest.next != null) {
+                queue.offer(smallest.next);
+            }
         }
         return dummy.next;
     }
