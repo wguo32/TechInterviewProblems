@@ -37,3 +37,59 @@ class Solution {
       helper(i, j + 1, grid);
     }
 }
+
+
+// use BFS
+class Solution {
+    class Point {
+        int x;
+        int y;
+        Point(int a, int b) {
+            this.x = a;
+            this.y = b;
+        }
+    }
+
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return 0;
+        }
+
+        int num = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') {
+                    bfs(i, j, grid);
+                    num++;
+                }
+            }
+        }
+        return num;
+    }
+
+    private void bfs(int i, int j, char[][] grid) {
+        int[] deltaX = {-1, 0, 1, 0};
+        int[] deltaY = {0, 1, 0, -1};
+
+        Queue<Point> queue = new LinkedList<>();
+        queue.offer(new Point(i, j));
+        grid[i][j] = '0';
+
+        while (!queue.isEmpty()) {
+            Point p = queue.poll();
+
+            for (int k = 0; k < 4; k++) {
+                int newX = p.x + deltaX[k];
+                int newY = p.y + deltaY[k];
+                if (inBound(newX, newY, grid) && grid[newX][newY] == '1') {
+                    queue.offer(new Point(newX, newY));
+                    grid[newX][newY] = '0';
+                }
+            }
+        }
+    }
+
+    private boolean inBound(int i, int j, char[][] grid) {
+        return i >=0 && i < grid.length && j >= 0 && j < grid[0].length;
+    }
+}
