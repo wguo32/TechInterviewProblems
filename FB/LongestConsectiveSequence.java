@@ -23,3 +23,38 @@ class Solution {
         return longest;
     }
 }
+
+// o(n) time complexity with hashset
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+
+        int result = 0;
+        for (int num : nums) {
+            if (set.contains(num)) {
+                set.remove(num);
+            }
+            int pre = num - 1;
+            int next = num + 1;
+
+            while (set.contains(pre)) {
+                set.remove(pre);
+                pre = pre - 1;
+            }
+
+            while (set.contains(next)) {
+                set.remove(next);
+                next = next + 1;
+            }
+            result = Math.max(result, next - pre - 1);
+        }
+        return result;
+    }
+}
