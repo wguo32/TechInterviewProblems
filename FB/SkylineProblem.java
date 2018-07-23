@@ -31,3 +31,31 @@ class Solution {
         return result;
     }
 }
+
+// using TreeMap with O(nlogn) time complexity
+class Solution {
+    class BuildingPoint implements Comparable(BuildingPoint) {
+        int x;
+        boolean isStart;
+        int height;
+
+        public int compareTo(BuildingPoint b) {
+            if (this.x != b.x) {
+                return this.x - b.x;
+            } else {
+                return (this.isStart ? -this.height : this.height) - (b.isStart ? -this.height : this.height);
+            }
+        }
+    }
+    public List<int[]> getSkyline(int[][] buildings) {
+        BuildingPoint points = new BuildingPoint[buildings.length * 2];
+        int index = 0;
+        // for (BuildingPoint p : points) {
+        //     p.isStart = true;
+        //     p.x= buildings[index][0];
+        //     p.height = buildings[index][2];
+        //
+        //     p.isStart = false;
+        // }
+    }
+}

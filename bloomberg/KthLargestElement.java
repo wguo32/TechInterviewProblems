@@ -1,4 +1,4 @@
-// using priority queue, time complexity O(nlogn), space complexity is O(k)
+// using priority queue, time complexity O(nlogk), space complexity is O(k)
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         Queue<Integer> queue = new PriorityQueue<>();
