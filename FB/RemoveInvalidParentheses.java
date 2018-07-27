@@ -1,25 +1,54 @@
 class Solution {
     public List<String> removeInvalidParentheses(String s) {
-        List<String> ans = new ArrayList<>();
-        remove(s, ans, 0, 0, new char[]{'(', ')'});
-        return ans;
+        List<String> result = new ArrayList<>();
+
+        if (s == null) {
+            return result;
+        }
+
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+
+        queue.add(s);
+        visited.add(s);
+
+        boolean findLongest = false;
+        while (!queue.isEmpty()) {
+            String str = queue.poll();
+            if (validStr(str)) {
+                result.add(str);
+                findLongest = true;
+                continue;
+            }
+            if(findLongest) {
+                continue;
+            }
+            for(int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) != '(' && str.charAt(i) != ')') {
+                    continue;
+                }
+                String newStr = str.substring(0, i) + str.substring(i + 1);
+                if (!visited.contains(newStr)) {
+                    queue.add(newStr);
+                    visited.add(newStr);
+                }
+            }
+        }
+        return result;
     }
 
-    public void remove(String s, List<String> ans, int last_i, int last_j,  char[] par) {
-        for (int stack = 0, i = last_i; i < s.length(); ++i) {
-            if (s.charAt(i) == par[0]) stack++;
-            if (s.charAt(i) == par[1]) stack--;
-            if (stack >= 0) continue;
-            for (int j = last_j; j <= i; ++j)
-                if (s.charAt(j) == par[1] && (j == last_j || s.charAt(j - 1) != par[1]))
-                    remove(s.substring(0, j) + s.substring(j + 1, s.length()), ans, i, j, par);
-            return;
+    private boolean validStr(String str) {
+        int leftCount = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '(') {
+                leftCount++;
+            } else if (str.charAt(i) == ')') {
+                leftCount--;
+                if(leftCount < 0) {
+                    return false;
+                }
+            }
         }
-        String reversed = new StringBuilder(s).reverse().toString();
-        if (par[0] == '(') {
-            remove(reversed, ans, 0, 0, new char[]{')', '('});
-        } else {
-            ans.add(reversed);    
-        }
+        return leftCount == 0;
     }
 }
